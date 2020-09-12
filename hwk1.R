@@ -12,8 +12,7 @@ library("sand")
 # ---- C2 ----
 # Load data
 
-#path <- "C:/Users/rburke4/Box Sync/2018_bSpring/csc495Bx/hwk/hwk1-soln"
-path <- "/Volumes/BOYDDEPAUL/Fall Quarter 2018/DSC 480/hwk1"
+path <- "/class 480/hwk1"
 setwd(path)
 
 torch <- read.graph("torch3.graphml", format="graphml")
