@@ -1,0 +1,171 @@
+---
+title: "Homework 1 (DSC 480)"
+author: "Solution"
+date: "Fall 2018"
+output: html_document
+---
+## Some visualizations of the Human Torch data
+
+```{r}
+library(knitr)
+#setwd("/Users/rburke4/Box Sync/2018_bSpring/csc495Bx/hwk/hwk1-soln")
+setwd("/Volumes/BOYDDEPAUL/Fall Quarter 2018/DSC 480/hwk1")
+
+read_chunk("hwk1.R")
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Load the necessary libraries and data
+
+Note that I include the chunk options results="hide", etc. because
+loading libraries produces a lot of output that we don't want
+on our page. You will need to install all of these packages for
+this part to work. 
+
+```{r C1, results="hide", warning=FALSE, message=FALSE}
+
+```
+
+### Loading the data
+
+Next we need to load the data file. This file is included in the homework zip file. You will need to set the path appropriately. The data is a very small subset of a large social network of Marvel comic book characters.
+
+```{r C2}
+
+```
+
+### Pointers to help
+
+You will find it useful to refer to the following help articles in doing this assignment.
+
+* igraph-vs-attributes
+* igraph-es-attributes
+* igraph.plotting
+* degree
+* graph.strength
+
+## Graded portion *(14 points + 2 extra credit)*
+
+### Step 1: Introduction *(1 pt)*
+
+* Go to Slack. Upload an actual picture of yourself as a profile picture. (Not your dog or your favorite Pokemon.)
+* Post to the "#general" channel:
+    + Your name
+    + Your degree program
+    + What types of networks you are interested in
+* Post to the "#homework" channel:
+    + A "small world" story: a situation in which an unexpected social connection manifested itself.
+
+### Step 2: Names *(1 pt)*
+
+Output the names of the characters from the nodes in the Marvel network (`label` atribute).
+
+```{r C3}
+```
+
+### Step 3: Edge filtering *(2 pts)*
+
+You can see from the summary above that the network has a very large number of edges. We will reduce the number of edges by deleting all edges of weight less than 50. These are characters who have appeared in fewer than 50 issues together. 
+
+To do the filtering, use the `delete_edges` function. Create the vector of edges to delete by using the following expression: `E(torch)[E(torch)$weight < 50]`
+
+```{r C4a}
+```
+
+Question: How does the code `E(torch)[E(torch)$weight < 50]` create the vector of edges to delete? (Hint: examine the Help documentation for `[`, concentrating on the parts about logical vectors, if you are uncertain.)
+
+Answer: _Write your answer here in the markdown file_
+
+The code segment above creates a true/false vector for the edges to delete. Then the code will only focus on values where the edges of weight less than 50 which will be deleted.
+
+### Step 4: Visualization 1 *(2 pts)*
+
+Create a simple visualization of the Marvel network using base plotting in igraph (`plot`). It should include the names for each vertex.
+
+```{r C5, fig.width=7, fig.height=6}
+
+```
+
+### Step 5: Calculate degree *(2 pts)*
+
+Calculate degree for the nodes and store the value in a variable. Output a summary (`summary` function) of the value.  (Hint: The mean should be 15.69 and the max should be 23.)
+ 
+```{r C6}
+
+```
+
+### Step 6: Visualization 2 *(2 pts)*
+
+Plot the degree distribution in a histogram. You can use either
+base plotting or ggplot to do this.
+
+```{r C7a, fig.width=4, fig.height=3}
+
+```
+
+```{r C7b, fig.width=4, fig.height=3}
+
+```
+
+### Step 7: Visualizing edge weights *(2 pt)*
+
+Create a histogram of the edge weight distribution. (The weights are stored in the `weight` attribute for each edge.) You can use either basic plotting or ggplot for this. I recommend a bin width of 25.
+
+```{r C8a, fig.width=4, fig.height=3}
+
+```
+
+```{r C8b, fig.width=4, fig.height=3}
+
+```
+
+### Step 8: Scaling the edge weights *(1 pt)*
+
+You can see that the minimum edge weight is 50, because of the filtering that we applied earlier. Re-scale the values by dividing by 50 so that the minimum weight is 1 and assign the new weights to the attribute `wt`. 
+
+```{r C9}
+
+```
+
+### Step 8: Compute weighted degree *(1 pt)*
+
+The `graph.strength` function computes weighted degree values. Use this function to compute weighted degree using the `wt` attribute computed in Step 7.
+
+(Hint: the summary should show a mean of 48.85 and a max of 94.04.)
+
+```{r C10}
+
+```
+
+### Step 9: Visualization 3 *(2 pts)*
+Plot the distribution using a histogram. Note that weighted degree will be a real number, not an integer. A bin width of 10 is recommended.
+
+```{r C11, fig.width=4, fig.height=3}
+
+```
+
+Your histogram should look like this:
+
+```{r, out.width = "200px"}
+knitr::include_graphics("weighted-degree-hist.jpg")
+```
+
+### Step 10: Weighted degree by gender *(2 pts)*
+The characters are labeled by gender. As we did in class, compute comparative boxplots of weighted degree for Male and Female characters. Do this in two stages, first setting up the data frame and second performing the plot.
+
+```{r C12a}
+
+```
+
+```{r C12b, fig.width=4, fig.height=3}
+
+```
+
+### Extra credit: Character with highest weighted degree *(2 pts)*
+
+Write a one-line expression that returns the name of the character with the highest weighted degree.
+
+```{r Extra}
+
+```
+
